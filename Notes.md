@@ -16,16 +16,12 @@ To change the index numbers in the far left column:
 brics = [‘BR’, ‘CH’, ‘DU’]
 
 **Import and read a csv file into a DataFrame**  
+
     import pandas as pd  
     brics = pd.read_csv(“brics.csv”, index_col = 0)  
     index_col = 0 shifts the DataFrame a column left  
 
 ---
-
-### Variables  
-
-    var ourName;  
-    ourName = 5;  
 
 **Select column with type DataFrame**
 brics[[‘country’]] 
