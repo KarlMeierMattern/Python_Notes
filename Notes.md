@@ -1,6 +1,6 @@
 # Python Notes  
 
-## Pandas DataFrames
+## Pandas DataFrames  
 - Pandas is built on top of Numpy and Matplotlib.
 - Better than Numpy array as DataFrames can contain multiple data types.
 You can think of DataFrame columns as single-dimension arrays called Series.
@@ -15,12 +15,12 @@ brics = pd.DataFrame(dict)
 To change the index numbers in the far left column:
 brics = [‘BR’, ‘CH’, ‘DU’]
 
-Import and read a csv file into a DataFrame:
-import pandas as pd
-brics = pd.read_csv(“brics.csv”, index_col = 0)
+**Import and read a csv file into a DataFrame**:
+    import pandas as pd
+  brics = pd.read_csv(“brics.csv”, index_col = 0)
 index_col = 0 shifts the DataFrame a column left
 
-Select column with type DataFrame:
+**Select column with type DataFrame**
 brics[[‘country’]] 
 brics.loc[ :, [‘country’, ‘capital’]] - selects the country and capital columns
 brice.loc[ :, ‘country’: ‘capital’] - selects columns from country to capital
