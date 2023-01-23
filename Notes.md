@@ -1,6 +1,8 @@
 # Python Notes  
 
 ## Pandas DataFrames  
+---
+
 - Pandas is built on top of Numpy and Matplotlib.  
 - Better than Numpy array as DataFrames can contain multiple data types.  
 - You can think of DataFrame columns as single-dimension arrays called Series.
@@ -13,7 +15,8 @@ Pandas is for dataframes
     brics = pd.DataFrame(dict)  
     
 - To change the index numbers in the far left column:  
-    brics = [‘BR’, ‘CH’, ‘DU’]
+
+    brics = [‘BR’, ‘CH’, ‘DU’]  
 
 **Import and read a csv file into a DataFrame**  
 
