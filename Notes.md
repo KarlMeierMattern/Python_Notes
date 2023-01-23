@@ -1,4 +1,4 @@
 ### Python Notes  
-Hello  
+Hello
 my name is Karl.
 This is a new line
