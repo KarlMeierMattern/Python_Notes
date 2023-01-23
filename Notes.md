@@ -22,6 +22,11 @@ brics = [‘BR’, ‘CH’, ‘DU’]
 
 ---
 
+### Variables  
+
+    var ourName;  
+    ourName = 5;  
+
 **Select column with type DataFrame**
 brics[[‘country’]] 
 brics.loc[ :, [‘country’, ‘capital’]] - selects the country and capital columns
