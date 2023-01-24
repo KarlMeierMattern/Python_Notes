@@ -12,7 +12,7 @@
 ### Example  
 
         world = {‘key1’:value1, ‘key2’:value2}  
-        world[‘key1’]
+        world[‘key1’]  
 > outputs value1  
         world[‘key3’] = value3  
 > adds this ‘key’:value pair to the end of the dictionary  
