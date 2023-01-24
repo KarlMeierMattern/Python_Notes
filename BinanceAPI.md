@@ -21,9 +21,14 @@
 
 ### Step 4  
 
-        depth = client.get_order_book(symbol = "BTCUSDT") - gets the order book (price & volume)  
-        depth_df.columns = ['Price','Volume'] # setting the column names - .columns is used to set column names  
+        depth = client.get_order_book(symbol = "BTCUSDT")  
 
+> Gets the order book (price & volume)  
+
+        depth_df.columns = ['Price','Volume']  
+
+> Setting the column names  
+> `.columns` is used to set column names  
 > `depth_df.dtypes` returns the data types of each column in the DateFrame  
 
 ### Step 5  
