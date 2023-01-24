@@ -11,18 +11,25 @@
 
 ### Example  
 
-        world = {‘key1’:value1, ‘key2’:value2}  
+        world = {‘key1’:2, ‘key2’:4}  
         world[‘key1’]  
-        
-> outputs value1  
-        world[‘key3’] = value3  
-> adds this ‘key’:value pair to the end of the dictionary  
-> `value3` in `world` returns the boolean True as the key `value3` is in the `world` dictionary  
-        world[‘key3’] = value4  
-> edits the value of `key3` to `value4`  
+
+> outputs `2`  
+
+        world[‘key3’] = 6  
+
+> adds the `key3:6` pair to the end of the dictionary  
+
+        world[‘key3’] = 8  
+
+> edits the value of `key3` to `8`  
+
         del(world[‘key3’]  
-> deletes the `key3:value4` pair from the world dictionary  
+
+> deletes the `key3:8` pair from the world dictionary  
+
         world = {‘key1’:value1, ‘key2’:value2}  
+        
 ---
 
 ### Methods  
