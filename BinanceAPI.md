@@ -33,16 +33,22 @@
 
 ### Step 5  
 
-        historical = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_1DAY, "1 Jan, 2011") - gets historical data per day from 1 Jan 2011  
+        historical = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_1DAY, "1 Jan, 2011")  
+
+> Gets historical data per day from `1 Jan 2011`  
         
 ### Step 6  
 
-        hist_df[numeric_columns] = hist_df[numeric_columns].apply(pd.to_numeric, axis=1) - .apply converts the columns listed in numeric_columns into numeric values and the argument axis = 1 performs the method on the actual columns  
+        hist_df[numeric_columns] = hist_df[numeric_columns].apply(pd.to_numeric, axis=1)  
+
+> `.apply` converts the columns listed in `numeric_columns` into numeric values and the argument `axis = 1` performs the method on the actual columns  
 
 ### Step 7  
 
         import mplfinance as mpf  
-        hist_df_view = hist_df.set_index('Close time').tail(100) # last 100 rows  
+        hist_df_view = hist_df.set_index('Close time').tail(100)  
+
+> Obtains the last 100 rows  
 
         mpf.plot(hist_df_view, type = 'candle', 
                 style = 'charles', 
