@@ -17,7 +17,9 @@
         
 ### Step 3  
 
-        tickers = client.get_all_tickers() - grabs all the tickers  
+        tickers = client.get_all_tickers()  
+
+> Grabs all the tickers  
 
 ### Step 4  
 
