@@ -1,0 +1,450 @@
+WORKING WITH DATES AND TIMES IN PYTHON
+
+1. Dates and calendars
+
+
+Example 1
+# Import date from datetime
+from datetime import date
+
+# Create a date object
+# Pass in the date (year, month, day) to the date object
+hurricane_andrew = date(1992, 8, 24)
+
+# Which day of the week is the date?
+# Use the weekday method
+print(hurricane_andrew.weekday())
+
+
+Methods & attributes
+●	weekday() method - returns 0 for Monday, 1 for Tuesday etc.
+●	.year attribute
+●	.month
+●	.day
+
+
+Example 2
+# Counter for how many before June 1
+# Initialise an empty counter
+early_hurricanes = 0
+
+# We loop over the dates
+# florida_hurrican_dates contains a list of dates from 1950 - 2017
+for hurricane in florida_hurricane_dates:
+  # Check if the month is before June (month number 6)
+  if hurricane.month < 6:
+    early_hurricanes = early_hurricanes + 1
+    
+
+Math with dates
+●	When subtracting dates you get an object ‘time delta’
+○	Access the .days attribute of this object to get the number of days
+●	When adding days to dates refer to the example below
+
+Example 1 (subtracting)
+from datetime import date
+
+# Create a date object for May 9th, 2007
+start = date(2007, 5, 9)
+
+# Create a date object for December 13th, 2007
+end = date(2007, 12, 13)
+
+# Subtract the two dates and print the number of days
+print((end - start).days)
+
+Example 2 (adding)
+from datetime import timedelta
+
+# Create a 29 day timedelta
+d1 = date(2017, 11, 5)
+td = timedelta(days=29)
+print(d1 + td)
+
+Output
+2017-12-04
+
+Example 3
+# Put the dates in order
+# You can use sorted() on several data types in Python, including sorting lists of numbers, lists of strings, or even lists of lists
+dates_ordered = sorted(dates_scrambled)
+
+# Print the first and last scrambled dates
+print(dates_scrambled[0])
+print(dates_scrambled[-1])
+
+
+Turning dates into strings
+●	Convert from datetime object into a string using isoformat() and strftime()
+●	ISO 8601 format is YYYY-MM-DD
+○	This format can be sorted using the sorted() method
+
+Every other format
+●	Use d.strftime())
+○	d.strftime(‘%Y’) lets you pass a format string which Python uses to format the date
+○	d.strftime(‘%Y/%m/%d’’)
+○	%B will print out the name of the month written out in full
+○	%j will print out the day in the year (out of 365 days)
+
+Example
+# Assign the earliest date to first_date
+first_date = min(florida_hurricane_dates)
+
+# Convert to ISO and US formats
+iso = "Our earliest hurricane date: " + first_date.isoformat()
+us = "Our earliest hurricane date: " + first_date.strftime("%m/%d/%Y")
+
+print("ISO: " + iso)
+print("US: " + us)
+
+
+2. Combining dates and times
+
+Dates and times
+
+Example 1
+Write the date and time October 1, 2017 3:23:25 PM
+# Import datetime
+from datetime import datetime
+dt = datetime(2017, 10, 1, 15, 23, 25, 500000)
+
+Example 2 (alternative using explicit assignment)
+# Import datetime
+from datetime import datetime
+dt = datetime(year=2017, month=10, day=1, hour=15, minute=23, second=25, microsecond=500000)
+
+Example 3
+# Use the .replace method to alter the date and time
+new_dt = dt.replace(minute=0, second=0, microsecond=0)
+
+Example 4
+# Create dictionary to hold results
+trip_counts = {'AM': 0, 'PM': 0}
+  
+# Loop over all trips
+for trip in onebike_datetimes:
+  # Check to see if the trip starts before noon using the .hour attribute
+  if trip['start'].hour < 12:
+    # Increment the counter for before noon
+    trip_counts['AM'] += 1
+  else:
+    # Increment the counter for after noon
+    trip_counts['PM'] += 1
+  
+print(trip_counts)
+
+
+Printing and parsing datetimes
+
+Example
+# Create datetime
+dt = datetime(2017, 12, 30, 15, 19, 13)
+print(dt.strftime("%Y-%m-%d %H:%M:%S"))
+print(dt.isoformat())
+
+Parsing datetimes with strptime
+●	strftime() and strptime() are the opposite of one another
+○	strftime() create strings from date objects
+○	strptime() create date objects from strings
+Example 1
+# Import datetime
+from datetime import datetime
+
+# Pass in the string we want to parse as well as the format string
+# dt will be a string representation of the datetime when printed
+dt = datetime.strptime("12/30/2017 15:19:13", "%m/%d/%Y %H:%M:%S")
+
+
+Example 2
+Some computers store time as the number of seconds since 1 Jan 1970 (Unix timestamp)
+
+# A timestamp of the number of seconds
+ts = 1514665153.0
+# Convert to datetime and print
+print(datetime.fromtimestamp(ts))
+
+Example 3
+
+Input
+ 
+
+# Write down the format string
+fmt = "%Y-%m-%d %H:%M:%S"
+
+# Initialize a list for holding the pairs of datetime objects
+onebike_datetimes = [ ]
+
+# Loop over all trips
+for (start, end) in onebike_datetime_strings:
+  trip = {'start': datetime.strptime(start, fmt),
+          'end': datetime.strptime(end, fmt)}
+  
+  # Append the trip
+  onebike_datetimes.append(trip)
+
+Output
+ 
+
+
+Working with durations
+
+
+Example 1
+# Create example datetimes
+start = datetime(2017, 10, 8, 23, 46, 47)
+end = datetime(2017, 10, 9, 0, 10, 57)
+
+# Subtract datetimes to create a timedelta
+duration = end - start
+
+# Subtract datetimes to create a timedelta
+print(duration.total_seconds())
+
+N.B.
+# Calling the .seconds attribute will print the number of seconds and omit the number of days
+# Whereas total_seconds() prints the number of seconds and days of elapsed time
+print(duration.seconds)
+
+
+Example 2 (creating timedeltas)
+# Import timedelta
+from datetime import timedelta
+
+# Create a one day and one second timedelta
+delta2 = timedelta(days=1, seconds=1)
+ 
+# One day and one second later
+print(start + delta2)
+
+
+
+3. Time zones and daylight savings
+
+UTC offsets
+●	All clocks are set relative to UTC (also called GMT)
+●	UTC is the the UK
+●	Moving east is +UTC and moving west is -UTC
+●	Setting a timezone tells datetime how to align itself to UTC
+
+Example 1
+# Import relevant classes
+from datetime import datetime, timedelta, timezone
+
+# US Eastern Standard time zone
+ET = timezone(timedelta(hours=-5))
+
+# Timezone-aware datetime
+# If tzinfo is not set, then datetime is timezone naive
+dt = datetime(2017, 12, 30, 15, 9, 3, tzinfo = ET)
+
+print(dt)
+
+Output
+Shows the UTC offset i.e. shows UTC and the time delta
+I.e. clocks in the US Eastern time would be showing 10:09:03
+ 
+
+Example 2 (adjusting timezones)
+●	When you need to move a datetime from one timezone to another
+
+# India Standard time zone
+IST = timezone(timedelta(hours=5, minutes=30))
+
+# Convert to IST
+print(dt.astimezone(IST))
+
+Output
+1:39:03 is the time in India which is 5hr30min past UTC
+ 
+
+Distinguishing between adjusting timezones and changing tzinfo
+●	print(dt.replace(tzinfo=timezone.utc))
+○	Changes the tzinfo argument to equal UTC meaning there is 0 offset
+○	The clock stays the same, but the UTC offset changes
+
+ 
+
+●	print(dt.astimezone(timezone.utc))
+○	Changes both the clock itself and the UTC offset
+○	In this instance this is the actual UTC time
+
+ 
+
+
+Timezone database
+●	There is a database of the timezones called tz
+●	Format ‘Continent/City’
+●	Used as an alternative to specifying the UTC offset yourself
+
+Example 1
+# Imports
+from datetime import datetime
+from dateutil import tz
+
+# Eastern time
+et = tz.gettz('America/New_York')
+
+# Last ride
+# Instead of specifying the UTC offset yourself you pass in the timezone you got from et
+last = datetime(2017, 12, 30, 15, 9, 3, tzinfo=et)
+print(last)
+
+Output
+ 
+
+Example 2
+# Create the timezone object
+uk = tz.gettz('Europe/London')
+
+# Pull out the start of the first trip
+local = onebike_datetimes[0]['start']
+
+# What time was it in the UK?
+notlocal = local.astimezone(uk)
+
+# Print them out and see the difference
+print(local.isoformat())
+print(notlocal.isoformat())
+
+Output
+●	The first shows the original time relative UTC
+●	The second shows the time relative to London (UTC +1) i.e. shows the UK timezone
+ 
+
+
+Daylight saving time (daylight shifting time)
+●	Clocks move forward in spring
+●	Clocks move back in autumn
+●	When we compare times in local time zones, everything gets converted into clock time. Remember if you want to get absolute time differences, always move to UTC!
+○	Use df.astimezone(timezone.utc) to convert to UTC time
+
+Ending daylight saving time
+●	Clock gets pushed back
+●	Map everything back to UTC
+●	Use tz.enfold to fold over the duplicate times, when the clock gets pushed back
+○	tz.enfold takes the new enfolded time i.e. the time that was pushed back
+
+Example 1
+from dateutil import tz
+
+# Loop over trips
+for trip in onebike_datetimes:
+
+  # Rides with ambiguous start
+  # Ambiguous times are when there are two overlapping times due to daylight saving ending
+  if tz.datetime_ambiguous(trip['start']):
+    print("Ambiguous start at " + str(trip['start']))
+
+  # Rides with ambiguous end
+  if tz.datetime_ambiguous(trip['end']):
+    print("Ambiguous end at " + str(trip['end']))
+
+
+Example 2
+from datetime import timezone
+from dateutil import tz
+
+trip_durations = []
+
+for trip in onebike_datetimes:
+  # When the start is later than the end, set the fold to be 1
+  if trip['start'] > trip['end']:
+    trip['end'] = tz.enfold(trip['end'])
+
+  # Convert to UTC
+  start = trip['start'].astimezone(timezone.utc)
+  end = trip['end'].astimezone(timezone.utc)
+
+  # Subtract the difference
+  trip_length_seconds = (end-start).total_seconds()
+  trip_durations.append(trip_length_seconds)
+
+# Take the shortest trip duration
+print("Shortest trip: " + str(min(trip_durations)))
+
+Note
+Since Python does not handle tz.enfold() when doing arithmetic, we must put our datetime objects into UTC, where ambiguities have been resolved (using timezone.utc)
+
+
+
+4. Easy and powerful: dates and times in Pandas
+
+Loading a .csv file in Pandas
+
+Example 1
+# Import pandas
+import pandas as pd
+
+# Load CSV into the rides variable
+rides = pd.read_csv('capital-onebike.csv', 
+                    parse_dates = ['Start date','End date'])
+
+Example 2
+# Subtract the start date from the end date
+ride_durations = rides['End date'] - rides['Start date']
+
+# Convert the results to seconds and create a new columnf
+rides['Duration'] = ride_durations.dt.total_seconds()
+
+
+Summarizing datetime data in Pandas
+●	.resample() is the same as groupby but allows you to groupby time i.e. ‘M’ is month, ‘D’ is days etc.
+●	Whereas .resample() groups rows by some time or date information, .groupby() groups rows based on the values in one or more columns.
+●	.resample() can be called after .groupby(). For example, how long was the median ride by month, and by Membership type?
+
+Example 1
+# Import matplotlib
+import matplotlib.pyplot as plt
+
+# Resample rides to monthly, take the size, plot the results
+rides.resample('M', on = 'Start date')\
+  .size()\
+  .plot(ylim = [0, 150])
+
+# Show the results
+plt.show()
+
+Example 2
+# Resample rides to be monthly on the basis of Start date
+monthly_rides = rides.resample('M', on = 'Start date')['Member type']
+
+# Take the ratio of the .value_counts() over the total number of rides
+# .value_counts() counts the number of member and casual rides
+# .size() counts the total number of rides
+print(monthly_rides.value_counts() / monthly_rides.size())
+
+Example 3
+# Group rides by member type, and resample to the month
+grouped = rides.groupby('Member type').resample('M', on = 'Start date')
+
+# Print the median duration for each group
+print(grouped['Duration'].median())
+
+
+Additional datetime methods in Pandas
+
+
+Example 1
+# Localize the Start date column to America/New_York
+# dt.tz_localize sets a new timezone, but keeps date and time the same
+rides['Start date'] = rides['Start date'].dt.tz_localize('America/New_York', ambiguous='NaT')
+
+# Print first value
+print(rides['Start date'].iloc[0])
+
+# Convert the Start date column to Europe/London
+# dt.tz_convert changes the date and time to match a new timezone
+rides['Start date'] = rides['Start date'].dt.tz_convert('Europe/London')
+
+# Print the new value
+print(rides['Start date'].iloc[0])
+
+
+Example 2
+# Add a column for the weekday of the start of the ride
+rides['Ride start weekday'] = rides['Start date'].dt.day_name()
+
+# Print the median trip time per weekday
+print(rides.groupby('Ride start weekday')['Duration'].median())
+
+Output
