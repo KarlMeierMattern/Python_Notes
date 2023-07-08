@@ -7,6 +7,8 @@ logins["david"] = {"email" : "a@a.com", "password" : "Baldy1"}
 logins["katie"] = {"email" : "b@b.com", "password" : "k8t"}
 logins["yul"] = {"email" : "c@c.com", "password" : "etc"}
 
+# post packages up all the data from forms to the webserver.
+# Need to specify the methods being received. At the moment, that's just 'post', but it does need to be ALL CAPS - POST.
 @app.route("/login", methods = ["POST"])
 def login():
   form = request.form
